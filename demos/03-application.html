@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>An Application</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class TodoApp extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    items: [],
+                    text: ""
+                };
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                if (!this.state.text.length) {
+                    return;
+                }
+
+                const newItem = {
+                    id: Date.now(),
+                    text: this.state.text
+                };
+
+                this.setState((state) => {
+                    return {
+                        items: state.items.concat(newItem),
+                        text: ""
+                    };
+                });
+            }
+
+            handleChange(e) {
+                this.setState({ text: e.target.value });
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h3>TODO</h3>
+                        <TodoList items={this.state.items} />
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor="new-todo">
+                                What needs to be done?
+                            </label>
+                            <input
+                                id="new-todo"
+                                type="text"
+                                value={this.state.text}
+                                onChange={this.handleChange}
+                            />
+                            <button>Add #{this.state.items.length + 1}</button>
+                        </form>
+                    </div>
+                );
+            }
+        }
+
+        class TodoList extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+
+            render() {
+                const items = this.props.items.map((item) => {
+                    return (
+                        <li key={item.id}>{item.text}</li>
+                    );
+                });
+                
+                return (
+                    <ul>
+                        {items}
+                    </ul>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <TodoApp />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>
