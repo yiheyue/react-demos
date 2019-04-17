@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <h2>In React</h2>
+    <div id="root"></div>
+
+    <hr>
+
+    <h2>In HTML</h2>
+    <!--
+        This form has the default HTML form behavior of browsing to
+        a new page when the user submits the form.
+    -->
+    <form>
+        <label>
+            Name:
+            <input type="text" name="name" />
+        </label>
+        <input type="submit" value="Submit button" />
+    </form>
+
+    <script type="text/babel">
+        // In most cases, it's convenient to have a JavaScript function
+        // that handles the submission of the form and has access to the
+        // data that the user entered into the form. The standard way to
+        // archieve this is with a technique called "controlled components".
+        class NameForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { value: "" };
+
+                this.handleSubmit = this.handleSubmit.bind(this);
+                this.handleChange = this.handleChange.bind(this);
+            }
+
+            handleSubmit(event) {
+                console.log("handle submit");
+                alert("A name was submitted: " + this.state.value);
+                event.preventDefault();
+                this.setState({ value: "" });
+            }
+
+            handleChange(event) {
+                console.log("handle change");
+                this.setState({ value: event.target.value.toUpperCase() });
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Name:
+                            <input
+                                type="text"
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                            />
+                        </label>
+                        <input
+                            type="submit"
+                            value="Submit button"
+                        />
+                    </form>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <NameForm />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

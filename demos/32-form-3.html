@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <hr>
+
+    <select>
+        <option value="china">China</option>
+        <option value="america" selected>America</option>
+        <option value="russia">Russia</option>
+        <option value="japan">Japan</option>
+    </select>
+
+    <script type="text/babel">
+        class FavorForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { value: "america" };
+
+                this.handleSubmit = this.handleSubmit.bind(this);
+                this.handleChange = this.handleChange.bind(this);
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+                console.log("Your favorite country is " + this.state.value);
+            }
+
+            handleChange(event) {
+                this.setState({ value: event.target.value });
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Pick your favorite country:
+                            <select
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                            >
+                                <option value="china">China</option>
+                                <option value="america">America</option>
+                                <option value="russia">Russia</option>
+                                <option value="japan">Japan</option>
+                            </select>
+                        </label>
+                        <input
+                            type="submit"
+                            value="Submit button"
+                        />
+                    </form>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <FavorForm />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

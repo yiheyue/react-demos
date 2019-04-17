@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <hr>
+
+    <textarea>Hello, my name is Tony. Nice to meet you!</textarea>
+
+    <script type="text/babel">
+        class EssayForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { value: "Please write an essay about your favorite DOM element." };
+
+                this.handleSubmit = this.handleSubmit.bind(this);
+                this.handleChange = this.handleChange.bind(this);
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+                console.log("An essay was submitted: " + this.state.value);
+            }
+
+            handleChange(event) {
+                this.setState({ value: event.target.value });
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Essay:
+                            <textarea
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                            />
+                        </label>
+                        <input
+                            type="submit"
+                            value="Submit button"
+                        />
+                    </form>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <EssayForm />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>
