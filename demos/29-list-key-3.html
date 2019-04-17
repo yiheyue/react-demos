@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Recommended
+        const todoItems = todos.map((todo) => {
+            return <li key={todo.id}>{todo.text}</li>;
+        });
+
+        // Don't recommended
+        const todoItems = todos.map((todo, index) => {
+            // Only do this if items have no stable IDs
+            return <li key={index}>{todo.text}</li>;
+        });
+
+        // Keys serve as a hint to React but they don't get passed to
+        // your components
+    </script>
+</body>
+</html>

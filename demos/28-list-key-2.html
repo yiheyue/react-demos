@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function NumberList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((number, i) => {
+                return <li key={i}>{number}</li>;
+            });
+
+            return (
+                <ul>{listItems}</ul>
+            );
+        }
+
+        const numbers = [12, 23, -32, -1, 0, 63];
+
+        ReactDOM.render(
+            <NumberList numbers={numbers} />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

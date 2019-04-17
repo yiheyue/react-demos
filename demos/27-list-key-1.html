@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Transform lists in JavaScript
+        const numbers = [12, 29, -1, 0, 31];
+        const doubled = numbers.map((number) => {
+            return number * 2;
+        });
+        console.log(doubled);
+
+        // Transform arrays into lists of elements in React
+        const scores = [96, 75, 99, 68];
+        const listItems = scores.map((score, i) => {
+            return <li key={i}>{score}</li>;
+        });
+
+        ReactDOM.render(
+            <ul>{listItems}</ul>,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>
