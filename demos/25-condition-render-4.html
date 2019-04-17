@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class LoginText extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { isLoggedIn: true };
+            }
+
+            render() {
+                const isLoggedIn = this.state.isLoggedIn;
+
+                return (
+                    <div>
+                        The user is <strong>{isLoggedIn ? "currently" : "not"}</strong> logged in.
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <LoginText />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>
