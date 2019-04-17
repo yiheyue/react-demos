@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root1"></div>
+    <hr>
+    <div id="root2"></div>
+
+    <script type="text/babel">
+        // Normal functions in React can be called using this
+        class Welcome extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+
+            componentDidMount() {
+                this.sayHi();
+            }
+
+            sayHi() {
+                console.log("Hi!");
+                this.sayGoodbye();
+                console.log(this);
+            }
+
+            sayGoodbye() {
+                console.log("Goodbye!");
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>Nice to meet you!</h2>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Welcome />,
+            document.getElementById("root1")
+        );
+
+        class Toggle extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { isToggleOn: true };
+
+                // Callback functions should be bounded
+                this.handleClick = this.handleClick.bind(this);
+            }
+
+            handleClick() {
+                this.setState((state) => {
+                    return {
+                        isToggleOn: !state.isToggleOn
+                    };
+                });
+            }
+
+            render() {
+                return (
+                    <button onClick={this.handleClick}>
+                        {this.state.isToggleOn ? "State: ON" : "State: OFF"}
+                    </button>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Toggle />,
+            document.getElementById("root2")
+        );
+    </script>
+</body>
+</html>

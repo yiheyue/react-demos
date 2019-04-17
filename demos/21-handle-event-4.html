@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Passing Arguments to Event Handlers
+        //
+        //      <button onClick={(e) => this.deleteRow(id, e)}>
+        //          Delete Row
+        //      </button>
+        //
+        //      <button onClick={this.deleteRow.bind(this, id)}>
+        //          Delete Row
+        //      </button>
+        function Button01() {
+            function handleClick() {
+                console.log("click");
+                console.log("in handleClick: " + this); // undefined
+            }
+
+            console.log("in function: " + this); // undefined
+            
+            return (
+                <div>
+                    <h1>Button01</h1>
+                    <button onClick={handleClick}>Click me</button>
+                </div>
+            );
+        }
+
+        class Button02 extends React.Component {
+            handleClick(e) {
+                console.log("clicked");
+                console.log("event object: " + e.target);
+            }
+            
+            render() {
+                return (
+                    <button onClick={this.handleClick}>Click me</button>
+                );
+            }
+        }
+
+        // In this way, event object is behind arguments
+        class Button03 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { count: 1 };
+            }
+            
+            handleClick(id, name, e) {
+                console.log("id: " + id);
+                console.log("name: " + name);
+                console.log(e);
+                this.setState({ count: 2 });
+            }
+            
+            render() {
+                const id = 100;
+                const name = "John";
+                // this.handleClick.bind(this, id, name, e)
+                return (
+                    <button onClick={this.handleClick.bind(this, id, name)}>Click me</button>
+                );
+            }
+        }
+
+        // In this way, you must pass the event object
+        class Button04 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { count: 1 };
+            }
+            
+            handleClick(id, name, e) {
+                console.log("id: " + id);
+                console.log("name: " + name);
+                console.log(e);
+                this.setState({ count: 2 });
+            }
+            
+            render() {
+                const id = 100;
+                const name = "John";
+                return (
+                    <button onClick={(e) => this.handleClick(id, name, e)}>Click me</button>
+                );
+            }
+        }
+
+        // Recommend way to handle event
+        class Hello extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { msg: "hello" };
+            }
+
+            handleClick() {
+                console.log("click");
+                this.setState({ msg: "clicked" });
+            }
+
+            render() {
+                return (
+                    <button onClick={this.handleClick.bind(this)}>{this.state.msg}</button>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

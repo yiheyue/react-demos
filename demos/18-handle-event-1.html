@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <button onclick="activateLasers()">Activate Lasers</button>
+
+    <a href="https://www.bing.com/" onclick="console.log('clicked'); return false;">Go to bing!</a>
+
+    <script type="text/babel">
+        function activateLasers() {
+            console.log("=== Warning!!! ===");
+            console.log("Super lasers have been activated!");
+        }
+
+        // Handling events with React elements is very similar to handling
+        // events on DOM elements. There are some syntactic differences:
+        //      - React events are named using camelCase, rather than
+        //        lowercase.
+        //      - With JSX you pass a function as the event handler, rather
+        //        than a string.
+        //
+        // In HTML:
+        //      <button onclick="activateLasers()">
+        //          Activate Lasers
+        //      </button>
+        //
+        // In React:
+        //      <button onClick={activateLasers}>
+        //          Activate Lasers
+        //      </button>
+
+        // In HTML, to prevent the default link behavior of opening a new
+        // page, you can write:
+        //      <a href="#" onclick="console.log('clicked'); return false;">
+        //
+        // In React, you must call preventDefault:
+        function ActionLink() {
+            function handleClick(e) {
+                e.preventDefault();
+                console.log("click");
+            }
+            
+            return (
+                <a href="https://www.bing.com/" onClick={handleClick}>
+                    Click me
+                </a>
+            );
+        }
+
+        ReactDOM.render(
+            <ActionLink />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

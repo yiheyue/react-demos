@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // this.handleClick can be accessed (inside handleClick never use this)
+        class LoggingButton01 extends React.Component {
+            handleClick() {
+                console.log("button has been clicked");
+            }
+            
+            render() {
+                return (
+                    <button onClick={this.handleClick}>
+                        Click me
+                    </button>
+                );
+            }
+        }
+
+        // 1. bind this
+        class LoggingButton02 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { isOn: true };
+
+                this.handleClick = this.handleClick.bind(this);
+            }
+
+            componentDidMount() {
+                this.sayHi();
+            }
+
+            sayHi() {
+                console.log("Hi");
+                console.log(this);
+            }
+            
+            handleClick() {
+                console.log("button has been clicked");
+                this.setState((state) => {
+                    return {
+                        isOn: !state.isOn
+                    };
+                });
+            }
+            
+            render() {
+                return (
+                    <button onClick={this.handleClick}>
+                        {this.state.isOn ? "State: ON" : "State: OFF"}
+                    </button>
+                );
+            }
+        }
+
+        // 2. arrow function
+        class LoggingButton03 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { isOn: true };
+            }
+
+            componentDidMount() {
+                this.sayHi();
+            }
+
+            sayHi() {
+                console.log("Hi");
+                console.log(this);
+            }
+            
+            // arrow function will be mounted in the current scope
+            handleClick = () => {
+                console.log("button has been clicked");
+                this.setState((state) => {
+                    return {
+                        isOn: !state.isOn
+                    };
+                });
+            }
+            
+            render() {
+                return (
+                    <button onClick={this.handleClick}>
+                        {this.state.isOn ? "State: ON" : "State: OFF"}
+                    </button>
+                );
+            }
+        }
+
+        // 3. arrow function in the onClick
+        class LoggingButton04 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { isOn: true };
+            }
+
+            componentDidMount() {
+                this.sayHi();
+            }
+
+            sayHi() {
+                console.log("Hi");
+                console.log(this);
+            }
+
+            handleClick() {
+                console.log("button has been clicked");
+                this.setState((state) => {
+                    return {
+                        isOn: !state.isOn
+                    };
+                });
+            }
+            
+            render() {
+                return (
+                    <button onClick={(e) => this.handleClick(e)}>
+                        {this.state.isOn ? "State: ON" : "State: OFF"}
+                    </button>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <LoggingButton04 />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>
