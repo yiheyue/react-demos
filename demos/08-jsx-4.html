@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+    <style>
+        h1 {
+            color: Tomato;
+        }
+    </style>
+</head>
+<body>
+    <div id="root1"></div>
+    <div id="root2"></div>
+
+    <script type="text/babel">
+        const img1 = <img src="http://placekitten.com/200/300" />;
+
+        const imgUrl = "http://placekitten.com/300/300";
+        const img2 = <img src={imgUrl} />;
+
+        ReactDOM.render(
+            img1,
+            document.getElementById("root1")
+        );
+        
+        ReactDOM.render(
+            img2,
+            document.getElementById("root2")
+        );
+    </script>
+</body>
+</html>

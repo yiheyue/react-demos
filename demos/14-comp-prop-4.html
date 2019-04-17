@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Extracting components
+        function Comment(props) {
+            console.log(props);
+            return (
+                <div>hello</div>
+            );
+        }
+
+        ReactDOM.render(
+            <Comment name="John" age="12" />,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

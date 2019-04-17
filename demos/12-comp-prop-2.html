@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // React elements: DOM tags
+        const element01 = <h1>Hello, world!</h1>;
+
+        // React elements: React components
+        const element02 = <Welcome firstName="John" lastName="Smith" />
+
+        // props => { firstName: "John", lastName: "Smith" }
+        function Welcome(props) {
+            return <h1>Hello, {props.firstName} {props.lastName}.</h1>;
+        }
+
+        ReactDOM.render(
+            element02,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

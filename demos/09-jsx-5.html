@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        /*
+        const element01 = <div>Hello, world!</div>;
+
+        const element02 = <img src="http://placekitten.com/300/300" />;
+
+        const element03 = (
+            <div>
+                <h1>Greeting!</h1>
+                <p>How are you?<p>
+            </div>
+        );
+
+        const element04 = (
+            <div
+                prop01={value01}
+                prop02={value02}
+                ...
+            >
+                Hello, John!
+            </div>
+        );
+
+        const element05 = (
+            <TodoList
+                prop01={value01}
+                prop02={value02}
+                ...
+            />
+        );
+        */
+
+        // elementJSX and elementCE are identical
+        const elementJSX = (
+            <h1 className="greeting">
+                Hello, world!
+            </h1>
+        );
+
+        const elementCE = React.createElement(
+            "h1",
+            {className: "greeting"},
+            "Hello, world!"
+        );
+    </script>
+</body>
+</html>

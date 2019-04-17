@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Components let you split the UI into independent, reusable
+        // pieces, and think about each piece in isolation.
+        // Conceptually, components are like JavaScript functions. They
+        // accept arbitrary inputs (called "props") and return React
+        // elements describing what should appear on the screen.
+
+        // The simplest way to define a component is to write a JavaScript
+        // function:
+        function WelcomeFUNC(props) {
+            return <h1>Hello, {props.name}.</h1>;
+        }
+
+        // You can also use an ES6 class to define a component:
+        class WelcomeCLASS extends React.Component {
+            render() {
+                return <h1>Hello, {this.props.name}</h1>;
+            }
+        }
+        // WelcomeFUNC and WelcomeCLASS are components, they are equivalent
+        // from React's point of view.
+    </script>
+</body>
+</html>
