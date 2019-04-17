@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class Welcome extends React.Component {
+            // The only place where you can assign this.state is the
+            // constructor
+            constructor(props) {
+                super(props);
+                this.state = {
+                    name: "",
+                    age: 18
+                };
+            }
+
+            componentDidMount() {
+                this.setInfo();
+            }
+
+            // Do not modify state directly
+            // Wrong: this.state.name = "John"
+            // Instead, use this.setState()
+            setInfo() {
+                this.setState({ name: "John" });
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>Hello, {this.state.name}.</h1>
+                        <h2>Today, you are {this.state.age}.</h2>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Welcome />,
+            document.getElementById("root")
+        );
+
+        // Because this.props and this.state may be updated asynchronously,
+        // you should not rely on their values for calculating the next
+        // state.
+        // Wrong:
+        //      this.setState({
+        //          counter: this.state.counter + this.props.increment
+        //      });
+        // Correct:
+        //      this.setState((state, props) => {
+        //          return {
+        //              counter: state.counter + props.increment
+        //          };
+        //      });
+    </script>
+</body>
+</html>
