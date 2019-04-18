@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        ReactDOM.render(<input value="hi :)" />, document.getElementById("root"));
+
+        setTimeout(() => {
+            ReactDOM.render(<input value={undefined} />, document.getElementById("root"));
+        }, 1000);
+    </script>
+</body>
+</html>
